@@ -2,13 +2,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 import expressEjsLayouts from "express-ejs-layouts";
-
 import { VIEWS_PATH, PORT } from "./consts.js";
-
+import cookieParser from "cookie-parser";
 
 // import actions from controllers
 import { contact, home, postContact } from "./controllers/PageController.js";
 import { getUsers } from "./controllers/api/UserController.js";
+import * as AuthController from "./controllers/AuthController.js";
+import AuthRegisterValidation from "./middleware/validation/AuthRegisterValidation.js";
 
 import {
   login,
@@ -17,6 +18,7 @@ import {
   postRegister,
   register,
 } from "./controllers/AuthController.js";
+import ContactValidation from "./middleware/validation/ContactValidation.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -25,8 +27,10 @@ app.use(express.static("public"));
  * Import the body parser
  */
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
@@ -38,13 +42,19 @@ app.set("views", VIEWS_PATH);
  */
 app.get("/login", login);
 app.get("/register", register);
-app.post("/register", postRegister, register);
+//app.post("/register", postRegister, register);
+app.post(
+  "/register",
+  AuthRegisterValidation,
+  AuthController.postRegister,
+  AuthController.register
+);
 app.post("/login", postLogin, login);
 app.post("/logout", logout);
 
 app.get("/", home);
 app.get("/contact", contact);
-app.post("/contact", postContact, contact);
+app.post("/contact", ContactValidation, postContact, contact);
 
 /**
  * API Routing

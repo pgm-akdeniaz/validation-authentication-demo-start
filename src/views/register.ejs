@@ -2,23 +2,22 @@
   <h4>Register</h4>
   <%- include('./partials/form-errors') %>
   <form method="post" action="register">
-    <% locals.inputs?.forEach(input => { %>
-      <%- include('form-input', input) %>
-    <% }); %>
+    <% locals.inputs?.forEach(input => { %> <%- include('./partials/form-input',
+    input) %> <% }); %>
     <div class="input-container">
       <label for="role">Bevoegd als</label>
       <select name="role" id="roles">
         <% locals.roles?.forEach(role => { %>
-          <option value="<%= role.id %>"><%= role.name %></option>
+        <option value="<%= role.id %>"><%= role.name %></option>
         <% }); %>
       </select>
     </div>
     <div class="footer-container">
       <div class="footer-container-left">
-        <input type="submit" class="btn btn-primary" value="Register">
+        <input type="submit" class="btn btn-primary" value="Register" />
       </div>
       <div class="footer-container-right">
-        <input type="reset" class="btn btn-tertiary" value="Clear">
+        <input type="reset" class="btn btn-tertiary" value="Clear" />
         <a href="/login">Naar login...</a>
       </div>
     </div>
