@@ -11,7 +11,6 @@ const seed = async function (knex) {
   // password is "secret123"
   const password = "secret123";
   const hashedPassword = await bcrypt.hash(password, 12);
-  console.log(hashedPassword);
 
   // insert 5 users with meta and different roles (1-3)
   await knex(tableName).insert([

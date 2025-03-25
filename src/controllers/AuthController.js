@@ -1,24 +1,100 @@
-/**
- * An auth controller that handles login, register, and logout
- */
-
-/**
- * Login
- */
 import { validationResult } from "express-validator";
 import Role from "../models/Role.js";
 import User from "../models/User.js";
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
-  res.render("login", { layout: "layouts/authentication" });
-};
-export const postLogin = async (req, res, next) => {};
+  const inputs = [
+    {
+      name: "email",
+      label: "E-mail",
+      type: "text",
+      value: req.body?.email ? req.body.email : "",
+      err: req.formErrorFields?.email ? req.formErrorFields["email"] : "",
+    },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      value: req.body?.password ? req.body.password : "",
+      err: req.formErrorFields?.password ? req.formErrorFields["password"] : "",
+    }
+  ];
 
-/**
- * Register
- */
+  const flash = req.flash || {};
+
+  res.render("login", {
+    layout: "layouts/authentication",
+    inputs, 
+    flash
+  })
+
+};
+
+export const postLogin = async (req, res, next) => {
+  try {
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+      req.formErrorFields = {};
+
+      errors.array().forEach((error) => {
+        req.formErrorFields[error.path] = error.msg;
+      });
+
+      req.flash = {
+        type: "danger",
+        message: "Er zijn fouten opgetreden"
+      }
+
+      return next();
+    }
+
+    const user = await User.query().findOne({
+      email: req.body.email
+    })
+    if (!user) {
+      req.formErrorFields = { email: "Deze gebruiker bestaat niet" };
+      req.flash = {
+        type: "danger",
+        message: "Er zijn fouten opgetreden."
+      };
+
+      return next()
+    }
+
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
+      req.formErrorFields = { password: "Je hebt een ongeldig wachtwoord ingegeven." };
+      req.flash = {
+        type: "danger",
+        message: "Er zijn fouten opgetreden",
+      };
+      return next();
+    }
+
+    //create jwt token
+    const token = jwt.sign({
+      userId: user.id, email: user.email
+    }, process.env.TOKEN_SALT,
+      {
+        expiresIn: '1h'
+      })
+    
+    //add cookie
+    res.cookie('token', token, { httpOnly: true });
+
+    //to home page
+    res.redirect('/')
+
+
+  }
+  catch (e) {
+    next(e.message)
+  }
+};
+	
 export const register = async (req, res) => {
-  // input fields
   const inputs = [
     {
       name: "firstname",
@@ -49,12 +125,10 @@ export const register = async (req, res) => {
       err: req.formErrorFields?.password ? req.formErrorFields.password : "",
     },
   ];
-
-  // get the roles
+ 
   const roles = await Role.query();
   const flash = req.flash || {};
-
-  // render the register page
+ 
   res.render("register", {
     layout: "layouts/authentication",
     inputs,
@@ -66,26 +140,23 @@ export const register = async (req, res) => {
 export const postRegister = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-
-    // if we have validation errors
+ 
     if (!errors.isEmpty()) {
-      // set the form error fields
       req.formErrorFields = {};
       errors.array().forEach((error) => {
         req.formErrorFields[error.path] = error.msg;
       });
-
-      // set the flash message
+  
       req.flash = {
         type: "danger",
         message: "Er zijn fouten opgetreden",
       };
-
+  
       return next();
     } else {
       const user = await User.query().findOne({ email: req.body.email });
       const role = await Role.query().findOne({ id: req.body.role });
-
+ 
       // validate if the role exists in the database
       if (!role) {
         req.flash = { type: "danger", message: "Deze rol bestaat niet." };
@@ -94,22 +165,28 @@ export const postRegister = async (req, res, next) => {
       }
       // validate if the user already exists
       if (user) {
-        req.flash = {
-          type: "danger",
-          message: "Dit e-mail adres is al in gebruik.",
-        };
+        req.flash = { type: "danger", message: "Dit e-mail adres is al in gebruik." };
         req.formErrorFields = { email: "Dit e-mail adres is al in gebruik." };
         return next();
       }
-
-      // temp res.send
-      res.send("no errors, registrate the user");
+ 
+      	
+      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    
+      await User.query().insert({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: hashedPassword,
+        role_id: parseInt(req.body.role),
+      });
+    
+      res.redirect("/login");
     }
-  } catch (e) {
+    
+  } catch(e) {
     next(e.message);
   }
 };
-/**
- * Logout
- */
+
 export const logout = async (req, res) => {};

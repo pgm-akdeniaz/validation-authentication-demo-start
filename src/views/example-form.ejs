@@ -1,0 +1,19 @@
+<div class="container">
+  <p>
+    Dit is een formulier met meer dan één knop. De knoppen hebben allemaal een
+    andere waarde voor de 'action' parameter. De 'action' parameter wordt
+    gebruikt om te bepalen welke actie er moet worden uitgevoerd op de server.
+  </p>
+  <p>
+    Dit voorbeeld kan handig zijn voor jullie todo-applicatie, waarbij je een
+    todo kunt updaten, verwijderen of afvinken.
+  </p>
+
+  <form action="/example" method="POST">
+    <input type="hidden" name="id" value="27" />
+    <input type="text" name="task" />
+    <button name="action" value="update" type="submit">UPDATE</button>
+    <button name="action" value="delete" type="submit">DELETE</button>
+    <button name="action" value="check" type="submit">CHECK</button>
+  </form>
+</div>

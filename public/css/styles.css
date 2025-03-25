@@ -2,271 +2,248 @@
  * Import other CSS
  */
 
-@import url("reset.css");
+ @import url("reset.css");
 
-html {
-  font-size: 100%;
-}
-
-body {
-  background: url("/assets/images/pink-bg.jpg") no-repeat center center fixed;
-  background-size: cover;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  line-height: 1.75;
-  color: #000000;
-}
-
-body#authentication {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  margin: 3rem 0 1.38rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  line-height: 1.3;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 3.052rem;
-}
-
-h2 {
-  font-size: 2.441rem;
-}
-
-h3 {
-  font-size: 1.953rem;
-}
-
-h4 {
-  font-size: 1.563rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-}
-
-small,
-.text-small {
-  font-size: 0.8rem;
-}
-
-#content {
-  padding: 30px;
-}
-
-/**
- * Links
- */
-
-a {
-  text-decoration: none;
-  color: black;
-  border-bottom: 1px solid black;
-  transition: opacity 0.3s;
-}
-
-a:hover {
-  opacity: 0.6;
-  border: none;
-}
-
-/**
- * Navigation
- */
-
-nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 30px;
-  border-bottom: 1px solid black;
-}
-
-nav .logo {
-  font-size: 1.2rem;
-}
-
-nav ul {
-  display: flex;
-}
-
-nav ul li + li {
-  margin-left: 20px;
-}
-
-/**
- * Buttons
- */
-
-.btn {
-  padding: 7px;
-  display: block;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.btn-primary {
-  border: 1px solid black;
-  background-color: pink;
-}
-
-.btn-secondary {
-  border: 1px solid black;
-  background-color: rgb(250, 138, 156);
-}
-
-.btn-tertiary {
-  border: 1px solid black;
-  background-color: rgb(237, 83, 108);
-  color: white;
-}
-
-blockquote {
-  margin-left: 1rem;
-  font-style: italic;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 30px;
-}
-
-.columns {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.columns .left {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.columns .right {
-  flex: 1;
-}
-
-/**
-  * Forms
+ html {
+   font-size: 100%;
+ }
+ 
+ body {
+   background: url('/assets/images/pink-bg.jpg') no-repeat center center fixed;
+   background-size: cover;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: 400;
+   line-height: 1.75;
+   color: #000000;
+ }
+ 
+ body#authentication {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100vw;
+   height: 100vh;
+ }
+ 
+ p {
+   margin-bottom: 1rem;
+ }
+ 
+ h1, h2, h3, h4, h5 {
+   margin: 3rem 0 1.38rem;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: 400;
+   line-height: 1.3;
+ }
+ 
+ h1 {
+   margin-top: 0;
+   font-size: 3.052rem;
+ }
+ 
+ h2 {font-size: 2.441rem;}
+ 
+ h3 {font-size: 1.953rem;}
+ 
+ h4 {font-size: 1.563rem;}
+ 
+ h5 {font-size: 1.25rem;}
+ 
+ small, .text-small { font-size: 0.8rem; }
+ 
+ #content {
+   padding: 30px;
+ }
+ 
+ /**
+  * Links
   */
-.contact-wrapper {
-  border: 1px solid black;
-  background-color: #ffffff99;
-  padding: 1rem;
-  font-size: 0.9rem;
-  max-width: 600px;
-}
-
-.contact-wrapper h3 {
-  margin: 0 0 20px 0;
-  font-size: 1.5rem;
-}
-
-/**
- * Authentication Container
- */
-
-.auth-container {
-  background-color: white;
-  box-sizing: border-box;
-  width: 400px;
-  padding: 30px;
-  border: 1px solid black;
-}
-
-.auth-container h4 {
-  margin: 0 0 20px 0;
-}
-
-.alert {
-  padding: 1rem;
-  margin-bottom: 20px;
-  background-color: white;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  border: 1px solid black;
-}
-
-.alert.success {
-  border-color: green;
-  color: green;
-}
-
-.alert.danger {
-  border-color: red;
-  color: red;
-}
-
-form {
-  width: 100%;
-}
-
-form .input-container + .input-container {
-  margin-top: 10px;
-}
-
-form .input-container label {
-  display: block;
-}
-
-form .input-container .error {
-  color: red;
-  font-size: 0.8rem;
-}
-
-.input-container input,
-.input-container select,
-.input-container textarea {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  padding: 7px;
-  resize: vertical;
-}
-
-.input-container textarea {
-  min-height: 100px;
-}
-
-.footer-container {
-  display: flex;
-  margin-top: 40px;
-  justify-content: space-between;
-}
-
-.footer-container a {
-  border: none;
-  font-size: 0.9rem;
-}
-
-.footer-container .btn + .btn {
-  margin-left: 10px;
-}
-
-ul.form-errors {
-  padding: 7px 0 7px 10px;
-  background-color: lightcoral;
-  color: white;
-  margin-bottom: 20px;
-  font-size: 0.8rem;
-  list-style-type: disc;
-  list-style-position: inside;
-}
+ 
+ a {
+   text-decoration: none;
+   color: black;
+   border-bottom: 1px solid black;
+   transition: opacity .3s;
+ }
+ 
+ a:hover {
+   opacity: 0.6;
+   border: none;
+ }
+ 
+ /**
+  * Navigation
+  */
+ 
+ nav {
+   max-width: 1200px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
+   padding: 30px;
+   border-bottom: 1px solid black;
+ }
+ 
+ nav .logo {
+   font-size: 1.2rem;
+ }
+ 
+ nav ul {
+   display: flex;
+ }
+ 
+ nav ul li+li {
+   margin-left: 20px;
+ }
+ 
+ 
+ /**
+  * Buttons
+  */
+ 
+ .btn {
+   padding: 7px;
+   display: block;
+   border: none;
+   background: none;
+   cursor: pointer;
+ }
+ 
+ .btn-primary {
+   border: 1px solid black;
+   background-color: pink;
+ }
+ 
+ .btn-secondary {
+   border: 1px solid black;
+   background-color: rgb(250, 138, 156);
+ }
+ 
+ .btn-tertiary {
+   border: 1px solid black;
+   background-color: rgb(237, 83, 108);
+   color: white;
+ }
+ 
+ blockquote {
+   margin-left: 1rem;
+   font-style: italic;
+ }
+ 
+ .container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 30px;
+ }
+ 
+ .columns {
+   display: flex;
+   flex-wrap: wrap;
+ }
+ 
+ .columns .left {
+   flex: 1;
+   margin-right: 20px;
+ }
+ 
+ .columns .right {
+   flex: 1;
+ }
+ 
+ /**
+   * Forms
+   */
+ .contact-wrapper {
+   border: 1px solid black;
+   background-color: #FFFFFF99;
+   padding: 1rem;
+   font-size: 0.9rem;
+   max-width: 600px;
+ }
+ 
+ .contact-wrapper h3 {
+   margin: 0 0 20px 0;
+   font-size: 1.5rem;
+ }
+ 
+ /**
+  * Authentication Container
+  */
+ 
+ .auth-container {
+   background-color: white;
+   box-sizing: border-box;
+   width: 400px;
+   padding: 30px;
+   border: 1px solid black;
+ }
+ 
+ .auth-container h4 {
+   margin: 0 0 20px 0;
+ }
+ 
+ .alert {
+   padding: 1rem;
+   margin-bottom: 20px;
+   background-color: white;
+   font-size: 0.8rem;
+   line-height: 1.5;
+   border: 1px solid black;
+ }
+ 
+ .alert.success {
+   border-color: green;
+   color: green;
+ }
+ 
+ .alert.danger {
+   border-color: red;
+   color: red;
+ }
+ 
+ form {
+   width: 100%;
+ }
+ 
+ form .input-container + .input-container {
+   margin-top: 10px;
+ }
+ 
+ form .input-container label {
+   display: block;
+ }
+ 
+ form .input-container .error {
+   color: red;
+   font-size: 0.8rem;
+ }
+ 
+ .input-container input,
+ .input-container select,
+ .input-container textarea {
+   box-sizing: border-box;
+   display: block;
+   width: 100%;
+   padding: 7px;
+   resize: vertical;
+ }
+ 
+ .input-container textarea {
+   min-height: 100px;
+ }
+ 
+ 
+ .footer-container {
+   display: flex;
+   margin-top: 40px;
+   justify-content: space-between;
+ }
+ 
+ .footer-container a {
+   border: none;
+   font-size: 0.9rem;
+ }
+ 
+ .footer-container .btn + .btn {
+   margin-left: 10px;
+ }
