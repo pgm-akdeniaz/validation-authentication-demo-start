@@ -58,22 +58,12 @@ app.set("views", VIEWS_PATH);
 // Auth routes
 app.get("/login", AuthController.login);
 app.get("/register", AuthController.register);
-app.post(
-  "/register",
-  AuthRegisterValidation,
-  AuthController.postRegister,
-  AuthController.register
-);
-app.post(
-  "/login",
-  AuthLoginValidation,
-  AuthController.postLogin,
-  AuthController.login
-);
+app.post("/register", AuthRegisterValidation, AuthController.postRegister, AuthController.register);
+app.post("/login", AuthLoginValidation ,AuthController.postLogin, AuthController.login);
 app.post("/logout", AuthController.logout);
 
 // Page routes
-app.get("/", jwtAuth, PageController.home);
+app.get("/", jwtAuth ,PageController.home);
 app.get("/example", ExampleController.getExample);
 app.post("/example", ExampleController.postExample);
 
